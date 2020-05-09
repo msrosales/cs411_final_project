@@ -1,0 +1,60 @@
+1) GetCurrencyCodes -- https://cs411arbitrage.web.illinois.edu/test/GetCurrencyCodes
+
+cursor.execute("""SELECT CurrencyCode, CurrencyDescription FROM CurrencyCodes""")
+
+2) GetCurrencyExchangeRates -- https://cs411arbitrage.web.illinois.edu/test/GetCurrencyExchangeRates
+
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, ExchangeRate FROM CurrencyExchangeRates")
+
+3) GetLatestCurrencyExchangeRates -- https://cs411arbitrage.web.illinois.edu/test/GetLatestCurrencyExchangeRates
+
+cursor.execute("SELECT Date FROM CurrencyExchangeRates ORDER BY DATE(Date) DESC LIMIT 1")
+data = cursor.fetchall()
+date = data[0]["Date"]
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, ExchangeRate FROM CurrencyExchangeRates WHERE Date=\""+date+"\"")
+
+4) GetHistoricCurrencyExchangeRates -- https://cs411arbitrage.web.illinois.edu/test/GetHistoricCurrencyExchangeRates
+
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, ExchangeRate FROM CurrencyExchangeRatesArchive")
+
+5) SelectHistoricCurrencyExchangeRates -- https://cs411arbitrage.web.illinois.edu/test/SelectHistoricCurrencyExchangeRates?baseCode=JPY&targetCode=USD
+
+baseCode = request.args.get('baseCode')
+targetCode = request.args.get('targetCode')
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, ExchangeRate FROM CurrencyExchangeRatesArchive WHERE BaseCurrencyCode=\""+baseCode+"\" AND TargetCurrencyCode=\""+targetCode+"\"")
+
+6) SelectCurrencyExchangeRates -- https://cs411arbitrage.web.illinois.edu/test/SelectCurrencyExchangeRates?baseCode=JPY&targetCode=USD
+
+baseCode = request.args.get('baseCode')
+targetCode = request.args.get('targetCode')
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, ExchangeRate FROM CurrencyExchangeRates WHERE BaseCurrencyCode=\""+baseCode+"\" AND TargetCurrencyCode=\""+targetCode+"\"")
+
+7) SelectHistoricCurrencyExchangeRatesByDate --
+https://cs411arbitrage.web.illinois.edu/test/SelectHistoricCurrencyExchangeRatesByDate?date=2020-04-03
+
+date = request.args.get('date')
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, ExchangeRate FROM CurrencyExchangeRatesArchive WHERE Date=\""+date+"\"")
+
+8) SelectCurrencyExchangeRatesByDate -- https://cs411arbitrage.web.illinois.edu/test/SelectCurrencyExchangeRatesByDate?date=2020-04-09
+
+date = request.args.get('date')
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, ExchangeRate FROM CurrencyExchangeRates WHERE Date=\""+date+"\"")
+
+9) SelectCurrencyArbitrageLog --
+https://cs411arbitrage.web.illinois.edu/test/SelectCurrencyArbitrageLog?baseCode=JPY&targetCode=USD&degree=3
+
+baseCode = request.args.get('baseCode')
+targetCode = request.args.get('targetCode')
+degree = request.args.get('degree')
+cursor.execute("SELECT Date, BaseCurrencyCode, TargetCurrencyCode, IntermediateCurrencyCodes, Degree, ImpliedValue, ActualValue FROM CurrencyArbitrageLog WHERE BaseCurrencyCode=\""+baseCode+"\" AND TargetCurrencyCode=\""+targetCode+"\" AND Degree="+degree)
+
+
+
+
+
+
+SelectCurrencyArbitrageLog Endpoint With Additional Optional Parameter
+
+http://cs411arbitrage.web.illinois.edu/test/SelectCurrencyArbitrageLog?baseCode=JPY&targetCode=USD&degree=3
+http://cs411arbitrage.web.illinois.edu/test/SelectCurrencyArbitrageLog?baseCode=JPY&targetCode=USD&degree=3&sortBy=value
+http://cs411arbitrage.web.illinois.edu/test/SelectCurrencyArbitrageLog?baseCode=JPY&targetCode=USD&degree=3&sortBy=code

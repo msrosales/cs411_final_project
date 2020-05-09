@@ -1,0 +1,159 @@
+        public List<CurrencyCodes> GetCurrencyCodesFromDatabase_HostedDB()
+        {
+            //Declare Return Variable
+            List<CurrencyCodes> currencyCodes = new List<CurrencyCodes>();
+
+            //Hosted Database Endpoint
+            string endpointURL = "https://cs411arbitrage.web.illinois.edu/test/GetCurrencyCodes";
+
+            using (WebClient webClient = new WebClient())
+            {
+                string jsonResponse = webClient.DownloadString(endpointURL); //Get JSON Response String
+
+                if (string.IsNullOrWhiteSpace(jsonResponse) == false)
+                {
+                    //Convert JSON Response String To Object
+                    currencyCodes = JsonConvert.DeserializeObject<List<CurrencyCodes>>(jsonResponse);
+                }
+            }
+
+            return currencyCodes;
+        }
+
+
+        public List<CurrencyExchangeRates> GetHistoricCurrencyExchangeRatesFromDatabase_HostedDB()
+        {
+            //Declare Return Variable
+            List<CurrencyExchangeRates> CurrencyExchangeRatesDBList = new List<CurrencyExchangeRates>();
+
+            //Hosted Database Endpoint
+            string endpointURL = "https://cs411arbitrage.web.illinois.edu/test/GetCurrencyExchangeRates";
+
+            using (WebClient webClient = new WebClient())
+            {
+                string jsonResponse = webClient.DownloadString(endpointURL); //Get JSON Response String
+
+                if (string.IsNullOrWhiteSpace(jsonResponse) == false)
+                {
+                    //Convert JSON Response String To Object
+                    CurrencyExchangeRatesDBList = JsonConvert.DeserializeObject<List<CurrencyExchangeRates>>(jsonResponse);
+                }
+            }
+
+            return CurrencyExchangeRatesDBList;
+        }
+
+
+        public List<CurrencyExchangeRates> GetHistoricCurrencyExchangeRatesFromDatabase_HostedDB(string paramBaseCurrencyCode, string paramTargetCurrencyCode)
+        {
+            //Declare Return Variable
+            List<CurrencyExchangeRates> CurrencyExchangeRatesDBList = new List<CurrencyExchangeRates>();
+
+            //Hosted Database Endpoint
+            string endpointURL = "https://cs411arbitrage.web.illinois.edu/test/SelectHistoricCurrencyExchangeRates?baseCode=" + paramBaseCurrencyCode + "&targetCode=" + paramTargetCurrencyCode;
+
+            using (WebClient webClient = new WebClient())
+            {
+                string jsonResponse = webClient.DownloadString(endpointURL); //Get JSON Response String
+
+                if (string.IsNullOrWhiteSpace(jsonResponse) == false)
+                {
+                    //Convert JSON Response String To Object
+                    CurrencyExchangeRatesDBList = JsonConvert.DeserializeObject<List<CurrencyExchangeRates>>(jsonResponse);
+                }
+            }
+
+            return CurrencyExchangeRatesDBList;
+        }
+
+
+        public List<CurrencyExchangeRatesArchive> GetCurrencyExchangeRatesArchiveFromDatabase_HostedDB()
+        {
+            //Declare Return Variable
+            List<CurrencyExchangeRatesArchive> currencyExchangeRatesArchive = new List<CurrencyExchangeRatesArchive>();
+
+            //Hosted Database Endpoint
+            string endpointURL = "https://cs411arbitrage.web.illinois.edu/test/GetHistoricCurrencyExchangeRates";
+
+            using (WebClient webClient = new WebClient())
+            {
+                string jsonResponse = webClient.DownloadString(endpointURL); //Get JSON Response String
+
+                if (string.IsNullOrWhiteSpace(jsonResponse) == false)
+                {
+                    //Convert JSON Response String To Object
+                    currencyExchangeRatesArchive = JsonConvert.DeserializeObject<List<CurrencyExchangeRatesArchive>>(jsonResponse);
+                }
+            }
+
+            return currencyExchangeRatesArchive;
+        }
+
+
+        public List<CurrencyArbitrageLog> GetCurrencyArbitrageLogFromDatabase_HostedDB(string paramBaseCurrencyCode, string paramTargetCurrencyCode, int paramDegree)
+        {
+            //Declare Return Variable
+            List<CurrencyArbitrageLog> currencyArbitrageLogs = new List<CurrencyArbitrageLog>();
+
+            //Hosted Database Endpoint
+            string endpointURL = "https://cs411arbitrage.web.illinois.edu/test/SelectCurrencyArbitrageLog?baseCode=" + paramBaseCurrencyCode + "&targetCode=" + paramTargetCurrencyCode + "&degree=" + paramDegree.ToString();
+
+            using (WebClient webClient = new WebClient())
+            {
+                string jsonResponse = webClient.DownloadString(endpointURL); //Get JSON Response String
+
+                if (string.IsNullOrWhiteSpace(jsonResponse) == false)
+                {
+                    //Convert JSON Response String To Object
+                    currencyArbitrageLogs = JsonConvert.DeserializeObject<List<CurrencyArbitrageLog>>(jsonResponse);
+                }
+            }
+
+            return currencyArbitrageLogs;
+        }
+
+
+        public List<CurrencyExchangeRates> GetCurrencyExchangeRatesFromDatabase_HostedDB(string currentDate)
+        {
+            //Declare Return Variable
+            List<CurrencyExchangeRates> CurrencyExchangeRatesDBList = new List<CurrencyExchangeRates>();
+
+            //Hosted Database Endpoint
+            string endpointURL = "https://cs411arbitrage.web.illinois.edu/test/SelectCurrencyExchangeRatesByDate?date=" + currentDate;
+
+            using (WebClient webClient = new WebClient())
+            {
+                string jsonResponse = webClient.DownloadString(endpointURL); //Get JSON Response String
+
+                if (string.IsNullOrWhiteSpace(jsonResponse) == false)
+                {
+                    //Convert JSON Response String To Object
+                    CurrencyExchangeRatesDBList = JsonConvert.DeserializeObject<List<CurrencyExchangeRates>>(jsonResponse);
+                }
+            }
+
+            return CurrencyExchangeRatesDBList;
+        }
+
+
+        public List<CurrencyExchangeRates> GetLatestCurrencyExchangeRatesFromDatabase_HostedDB()
+        {
+            //Declare Return Variable
+            List<CurrencyExchangeRates> CurrencyExchangeRatesDBList = new List<CurrencyExchangeRates>();
+
+            //Hosted Database Endpoint
+            string endpointURL = "https://cs411arbitrage.web.illinois.edu/test/GetLatestCurrencyExchangeRates";
+
+            using (WebClient webClient = new WebClient())
+            {
+                string jsonResponse = webClient.DownloadString(endpointURL); //Get JSON Response String
+
+                if (string.IsNullOrWhiteSpace(jsonResponse) == false)
+                {
+                    //Convert JSON Response String To Object
+                    CurrencyExchangeRatesDBList = JsonConvert.DeserializeObject<List<CurrencyExchangeRates>>(jsonResponse);
+                }
+            }
+
+            return CurrencyExchangeRatesDBList;
+        }
