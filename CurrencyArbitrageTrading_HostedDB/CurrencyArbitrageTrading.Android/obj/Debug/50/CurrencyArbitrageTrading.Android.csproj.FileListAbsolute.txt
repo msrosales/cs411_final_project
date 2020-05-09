@@ -1,3 +1,0 @@
-C:\Temp\CurrencyArbitrageTrading\CurrencyArbitrageTrading.Android\obj\Debug\50\MonoAndroid,Version=v5.0.AssemblyAttributes.cs
-C:\Temp\CurrencyArbitrageTrading\CurrencyArbitrageTrading.Android\obj\Debug\50\build.props
-C:\Temp\CurrencyArbitrageTrading\CurrencyArbitrageTrading.Android\obj\Debug\50\adb.props
